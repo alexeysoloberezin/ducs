@@ -97,7 +97,7 @@ h1{
     width: 100%;
 }
 .container{
-    max-width: 900px;
+    max-width: 1000px;
     margin: 0 auto;
     padding: 0 10px;
 }
@@ -117,17 +117,176 @@ h2{
 .list{
     margin-top: 100px;
 }
+.list-item p {
+    max-width: 500px;
+}
+.list-date{
+    position: absolute;
+    bottom: 10px;
+    right: 20px;
+    width: fit-content !important;
+    display: block;
+    color: #7970F5;
+}
+.list-subtitle{
+    color: #292FD1;
+    font-weight: 700;
+    margin-bottom: 15px;
+    margin-top: 10px;
+}
+.text-blue{
+    color: #292ECF;
+}
+.text-coursor{
+    font-style: italic;
+}
+
 .list-item{
     margin-top: 20px;
+    position: relative;
     display: flex;
-    align-items: center;
-    padding: 0;
-    gap: 30px;
     flex-direction: row;
+    align-items: center;
+    padding: 0 40px 0 220px;
+    min-height: 200px;
+    gap: 30px;
+    transition: .5s;
 }
-.list-item img{
-    width: 200px;
+.list-item.full .list-date{
+    display: none;
+}
+.list-item-full-box{
+    display: none;
+}
+.list-item.full .list-item-full-box{
+    display: block;
+}
+.list-item.full .list-item-text{
+    display: none;
+}
+.list-item.hidden{
+    display: none !important;
+}
+.list-item:nth-child(1) .duck-box{
+    background: linear-gradient(180deg, #A017DF 0%, #570C79 90.52%);
+}
+.list-item:nth-child(2) .duck-box{
+    background: linear-gradient(180deg, #FF871F 0%, #C67C31 90.52%);
+}
+.list-item:nth-child(3) .duck-box{
+    background: linear-gradient(180deg, #FFDB39 0%, #C69C31 90.52%);
+}
+.list-item:nth-child(4) .duck-box{
+    background: linear-gradient(180deg, #1FEBB4 0%, #2AA181 90.52%);
+}
+
+.list-item.full{
+    border-radius: 60px;
+    padding-left: calc(50% + 30px);
+    padding-top: 30px;
+    padding-right: 30px;
+    padding-bottom: 30px;
+}
+.list-item-full.show{
+    display: grid;
+
+}
+
+.list-item-full-box{
+    padding: 0px 30px 30px 0;
+}
+.list-item-full-box p, .list-item-full-box b {
+    margin-bottom: 10px;
+    display: inline-block;
+}
+a{
+    color: #000;
+}
+.examples{
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    align-items: center;
+}
+.examples img{
+    max-width: 100%;
+    width: fit-content;
+}
+.examples>div{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    text-align: center;
+    font-weight: 700;
+}
+.examples>div{
+    min-height: 140px;
+}
+.examples div:nth-child(1) img{
+    max-width: 110px;
+}
+.examples div:nth-child(2) img{
+    max-width: 90px;
+    margin-top: 10px;
+}
+.examples div:nth-child(3) img{
+    max-width: 80px;
+    margin-top: 13px;
+}
+.m0{
+    margin: 0 !important;
+}
+.list-item-full-box{
+    font-size: 14px;
+}
+.list-item-full-box ul{
+    list-style: disc;
+    margin-bottom: 15px;
+}
+.list-item-full-box b{
+    font-weight: 700;
+}
+.list-item-full-box li{
+    margin-bottom: 4px;
+}
+.duck-box{
+    width: 200px !important;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+    flex-shrink: 0;
+    min-height: 180px;
     border-radius: 18px;
+}
+.duck-svg{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 210px;
+    height: auto;
+    display: block;
+    margin-left: -12px;
+    margin-top: -10px;
+    transform: translate(-50%,-50%);
+}
+.list-item-img{
+    width: 200px;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    flex-shrink: 0;
+    transition: .5s;
+    object-fit: cover;
+    border-radius: 18px;
+}
+.list-item.full .list-item-img{
+    width: 50%;
+    border-radius: 60px;
 }
 h3{
     font-size: 28px;
