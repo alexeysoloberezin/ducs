@@ -10,9 +10,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
 </head>
 <body >
-    <img class="app-bg" src="imgs/bg.jpg" alt="">
+    <img class="app-bg" src="imgs/bg.jpg"  id="parallaxBg" alt="">
 
-    <div class="app" style="background: url('imgs/bg.jpg') top/cover repeat-y;">
+    <div class="app" >
         <div class="wrp">
             <h1>Утиные бега</h1>
             <img class="duck" src="imgs/main.png" alt="">
@@ -160,7 +160,7 @@
                             <div class="list-item-text">
                                  <p>На этой недели нам нужно проявить внимательность и интеллект! Будут загадки, квизы и настоящий поиск сокровищ!</p>
                             </div>
-                            <div class="list-item-full-box">
+                            <div class="list-item-full-box list-item-full-box-1" id="step1">
                                 <div class="list-subtitle">
                                     Задание. Фоточеллендж «Найди утку»
                                 </div>
@@ -207,6 +207,44 @@
                                 </div>
 
                                 <p class="text-blue text-coursor tac" style="max-width: 80%;margin: 20px auto 0;">Участник, который отправит больше всего фото получит 10 BST</p>
+                            </div>
+                            <div class="list-item-full-box list-item-full-box-2" id="step2">
+                                <div class="list-subtitle">
+                                    Задание 2. Творческая мастерская
+                                </div>
+                                
+                                <p>Создай собственную утку любым способом:</p>
+                                <ul>
+                                    <li>нарисуй;</li>
+                                    <li>слепи;</li>
+                                    <li>собери из подручных материалов;</li>
+                                    <li>создай в графическом редакторе;</li>
+                                    <li>используй любой другой творческий формат.</li>
+                                </ul>
+                                <p>Готовый шедевр отправь в папку. На забудь подписать свое ФИО!</p>
+
+                                <p><b class="inline m0">24 июля</b>  на корп портале пройдет голосование за лучшую работу. Победитель получит дополнительно 10 BST.</p>
+
+                                <p class="text-coursor">Все участники получат 10 BST и ачивку.</p>
+                            </div>
+                            <div class="step-nav">
+                                <div class="step-indicator">
+                                    Шаг <span class="active-step" id="currentStepDisplay">1</span> / 2
+                                </div>
+                                <div class="step-buttons">
+                                    <button class="btn-step" id="prevBtn" disabled>
+                                        <svg width="16" height="16" viewBox="0 0 256 339" fill="none">
+                                            <path d="M255.028 165.908L4.71809 338.852L124.453 165.908L0.000106773 0.000448129L255.028 165.908Z" fill="#D9D9D9"/>
+                                        </svg>
+                                        Назад
+                                    </button>
+                                    <button class="btn-step" id="nextBtn">
+                                        Вперед
+                                        <svg width="16" height="16" viewBox="0 0 256 339" fill="none">
+                                            <path d="M255.028 165.908L4.71809 338.852L124.453 165.908L0.000106773 0.000448129L255.028 165.908Z" fill="#D9D9D9"/>
+                                        </svg>
+                                    </button>
+                                </div>
                             </div>
                         </div>
                         <div class="list-date">20.07-26.07</div>
@@ -267,18 +305,100 @@
             </div>
         </div>
     </div>
-</body>
 
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-    // Находим все элементы-триггеры
-    const triggers = document.querySelectorAll('.list-item-shownext');
+    </body>
 
-    triggers.forEach(function (trigger) {
-        trigger.addEventListener('click', function (e) {
-            this.classList.toggle('full');
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // === ПАРАЛЛАКС ===
+            const bg = document.getElementById('parallaxBg');
+            if (bg) {
+                const speed = 0.2;
+                let ticking = false;
+        
+                function updateParallax() {
+                    const scrollY = window.scrollY;
+                    bg.style.transform = 'translateY(-' + (scrollY * speed) + 'px)';
+                    ticking = false;
+                }
+        
+                function onScroll() {
+                    if (!ticking) {
+                        window.requestAnimationFrame(updateParallax);
+                        ticking = true;
+                    }
+                }
+        
+                window.addEventListener('scroll', onScroll);
+                window.addEventListener('load', updateParallax);
+                window.addEventListener('resize', updateParallax);
+                console.log('✅ Параллакс активирован!');
+            }
+        
+            // === ОТКРЫТИЕ/ЗАКРЫТИЕ КАРТОЧЕК (full) ===
+            const triggers = document.querySelectorAll('.list-item-shownext');
+            triggers.forEach(function(trigger) {
+                trigger.addEventListener('click', function(e) {
+                    // Если клик по кнопкам навигации — не переключаем
+                    if (e.target.closest('.btn-step') || e.target.closest('.step-nav')) {
+                        return;
+                    }
+                    this.classList.toggle('full');
+                });
+            });
+        
+            // === СТЕП-НАВИГАЦИЯ ===
+            const step1 = document.getElementById('step1');
+            const step2 = document.getElementById('step2');
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+            const currentStepDisplay = document.getElementById('currentStepDisplay');
+        
+            if (step1 && step2 && prevBtn && nextBtn) {
+                let currentStep = 1;
+                const totalSteps = 2;
+        
+                function updateSteps() {
+                    step1.classList.toggle('hidden', currentStep !== 1);
+                    step2.classList.toggle('hidden', currentStep !== 2);
+                    if (currentStepDisplay) {
+                        currentStepDisplay.textContent = currentStep;
+                    }
+                    prevBtn.disabled = currentStep === 1;
+                    nextBtn.disabled = currentStep === totalSteps;
+                }
+        
+                function goToStep(step) {
+                    if (step < 1 || step > totalSteps) return;
+                    currentStep = step;
+                    updateSteps();
+                }
+        
+                prevBtn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    if (currentStep > 1) goToStep(currentStep - 1);
+                });
+        
+                nextBtn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    if (currentStep < totalSteps) goToStep(currentStep + 1);
+                });
+        
+                document.addEventListener('keydown', function(e) {
+                    if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+                        e.preventDefault();
+                        if (currentStep < totalSteps) goToStep(currentStep + 1);
+                    } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+                        e.preventDefault();
+                        if (currentStep > 1) goToStep(currentStep - 1);
+                    }
+                });
+        
+                updateSteps();
+                console.log('✅ Степ-навигация активирована!');
+            } else {
+                console.warn('❌ Элементы для степ-навигации не найдены');
+            }
         });
-    });
-    });
-</script>
+        </script>
 </html>
