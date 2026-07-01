@@ -54,45 +54,13 @@
                 </div>
 
                 <div class="list">
-                    <div class="list-item card">
-                        <div class="duck-box">
-                           <img class="duck-svg" src="imgs/duck.svg" alt="">
-                        </div>
-                        <div>
-                            <h3>Скоро здесь появится утка</h3>
-                            <h3>???</h3>
-                        </div>
-                    </div>
-                    <div class="list-item card">
-                        <div class="duck-box">
-                           <img class="duck-svg" src="imgs/duck_2.svg" alt="">
-                        </div>
-                        <div>
-                            <h3>Скоро здесь появится утка</h3>
-                            <h3>???</h3>
-                        </div>
-                    </div>
-                    <div class="list-item card">
-                        <div class="duck-box">
-                           <img class="duck-svg" src="imgs/duck_3.svg" alt="">
-                        </div>
-                        <div>
-                            <h3>Скоро здесь появится утка</h3>
-                            <h3>???</h3>
-                        </div>
-                    </div>
-                    <div class="list-item card">
-                        <div class="duck-box">
-                           <img class="duck-svg" src="imgs/duck_4.svg" alt="">
-                        </div>
-                        <div>
-                            <h3>Скоро здесь появится утка</h3>
-                            <h3>???</h3>
-                        </div>
-                    </div>
+              
+                
+                   
+                 
 
                     <!-- 1 -->
-                    <div class="list-item list-item-shownext card">
+                    <div class="list-item list-item-shownext card" data-for="1">
                         <img class="list-item-img" src="imgs/item_1.jpg" alt="">
                         <div class="list-preview">
                             <h3>Дух авантюризма</h3>
@@ -127,9 +95,18 @@
                        
                         <div class="list-date">06.07-12.07</div>
                     </div>
-                  
+                    <div class="list-item list-item-d-1 card" data-index="1">
+                        <div class="duck-box">
+                           <img class="duck-svg" src="imgs/duck.svg" alt="">
+                        </div>
+                        <div>
+                            <h3>Скоро здесь появится утка</h3>
+                            <h3>???</h3>
+                        </div>
+                    </div>
+
                     <!-- 2 -->
-                    <div class="list-item card list-item-shownext">
+                    <div class="list-item card list-item-shownext" data-for="2">
                         <img class="list-item-img" src="imgs/item_2.jpg" alt="">
                         <div class="list-preview">
                             <h3>На старт, внимание, Кря!</h3>
@@ -156,9 +133,18 @@
                         </div>
                         <div class="list-date">13.07-19.07</div>
                     </div>
+                    <div class="list-item list-item-d-2 card" data-index="2">
+                        <div class="duck-box">
+                           <img class="duck-svg" src="imgs/duck_2.svg" alt="">
+                        </div>
+                        <div>
+                            <h3>Скоро здесь появится утка</h3>
+                            <h3>???</h3>
+                        </div>
+                    </div>
 
                     <!-- 3 -->
-                    <div class="list-item card list-item-shownext">
+                    <div class="list-item card list-item-shownext" data-for="3">
                         <img class="list-item-img" src="imgs/item_3.jpg" alt="">
                         <div class="list-preview">
                             <h3>Мир вокруг нас</h3>
@@ -254,9 +240,18 @@
                         </div>
                         <div class="list-date">20.07-26.07</div>
                     </div>
+                    <div class="list-item list-item-d-3 card" data-index="3">
+                        <div class="duck-box">
+                           <img class="duck-svg" src="imgs/duck_3.svg" alt="">
+                        </div>
+                        <div>
+                            <h3>Скоро здесь появится утка</h3>
+                            <h3>???</h3>
+                        </div>
+                    </div>
 
                     <!-- 4 -->
-                    <div class="list-item card list-item-shownext">
+                    <div class="list-item card list-item-shownext" data-for="4">
                         <img class="list-item-img" src="imgs/item_4.jpg" alt="">
                         <div>
                             <h3>Крясивые истории</h3>
@@ -288,8 +283,18 @@
                         </div>
                         <div class="list-date">27.07-31.07</div>
                     </div>
+                    <div class="list-item list-item-d-4 card"  data-index="4">
+                        <div class="duck-box">
+                           <img class="duck-svg" src="imgs/duck_4.svg" alt="">
+                        </div>
+                        <div>
+                            <h3>Скоро здесь появится утка</h3>
+                            <h3>???</h3>
+                        </div>
+                    </div>
                 </div>
-                <div class="board-wrp">
+                <br><br><br>
+                <!-- <div class="board-wrp">
                     <h2 class="tac text-white">Доска почета</h2>
                     <div class="card board">
                         <img class="board-img" src="imgs/im_1.png" alt="">
@@ -306,7 +311,7 @@
                         <h4>Пиявкинс</h4>
                         <div class="board-price">170 BST </div>
                     </div>
-                </div>
+                </div> -->
             </div>
         </div>
     </div>
@@ -405,5 +410,41 @@
                 console.warn('❌ Элементы для степ-навигации не найдены');
             }
         });
+
+        document.addEventListener('DOMContentLoaded', function() {
+    // Получаем сегодняшнюю дату (без времени)
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+
+    const listItems = document.querySelectorAll('.list-item-shownext');
+
+    listItems.forEach(function(item) {
+        const dateEl = item.querySelector('.list-date');
+        if (!dateEl) return;
+
+        // Парсим дату старта (первая дата)
+        const startDateStr = dateEl.textContent.trim().split('-')[0].trim();
+        const parts = startDateStr.split('.');
+        const startDate = new Date(2026, parseInt(parts[1]) - 1, parseInt(parts[0]));
+        startDate.setHours(0, 0, 0, 0);
+
+        // Определяем, наступила ли дата или ещё нет
+        const isActive = today >= startDate;
+        const isFuture = today < startDate;
+
+        const forAttr = item.getAttribute('data-for');
+        const placeholder = document.querySelector(`.list-item-d-${forAttr}`);
+
+        if (isActive) {
+            // Дата наступила — показываем основной блок, скрываем заглушку
+            item.style.display = 'flex';
+            if (placeholder) placeholder.style.display = 'none';
+        } else {
+            // Дата ещё не наступила — показываем заглушку, скрываем основной блок
+            item.style.display = 'none';
+            if (placeholder) placeholder.style.display = 'flex';
+        }
+    });
+});
         </script>
 </html>

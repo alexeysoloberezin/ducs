@@ -246,16 +246,16 @@ h2{
 .list-item.hidden{
     display: none !important;
 }
-.list-item:nth-child(1) .duck-box{
+.list-item-d-1 .duck-box{
     background: linear-gradient(180deg, #A017DF 0%, #570C79 90.52%);
 }
-.list-item:nth-child(2) .duck-box{
+.list-item-d-2 .duck-box{
     background: linear-gradient(180deg, #FF871F 0%, #C67C31 90.52%);
 }
-.list-item:nth-child(3) .duck-box{
+.list-item-d-3 .duck-box{
     background: linear-gradient(180deg, #FFDB39 0%, #C69C31 90.52%);
 }
-.list-item:nth-child(4) .duck-box{
+.list-item-d-4 .duck-box{
     background: linear-gradient(180deg, #1FEBB4 0%, #2AA181 90.52%);
 }
 
