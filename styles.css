@@ -258,7 +258,9 @@ h2{
 .list-item-d-4 .duck-box{
     background: linear-gradient(180deg, #1FEBB4 0%, #2AA181 90.52%);
 }
-
+.underline{
+    text-decoration: underline;
+}
 .list-item.full{
     border-radius: 60px;
     padding-left: calc(50% + 30px);
